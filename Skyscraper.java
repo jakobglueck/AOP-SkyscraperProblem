@@ -35,7 +35,6 @@ public class Skyscraper {
         }
         return amountOfSkyscraper;
     }
-        
 
     private static void displaySkyscraperViews( int[] skyscraperheight, int[] indexOfLeftPerson, int[] indexOfRightPerson ){
 
@@ -63,12 +62,8 @@ public class Skyscraper {
         System.out.println(amountOfSkyscraper);
         int [] skyscrapershape =  new int[amountOfSkyscraper];
 
-        double meanHeight = 7.0;
-        double variance = 3.0;
-
-        Random rand = new Random();
         for (int i = 0 ; i < amountOfSkyscraper; i++){
-            skyscrapershape[i] = (int) Math.max(0, Math.round(generateNormalDistribution(rand, meanHeight, variance)));
+            skyscrapershape[i] = (int) Math.max(0, Math.round(generateNormalDistribution()));
         }
         return skyscrapershape;
     }
@@ -109,18 +104,22 @@ public class Skyscraper {
 
     private static int[] convertToArray(ArrayList<Integer> list) {
         int[] result = new int[list.size()];
+
         for (int i = 0; i < list.size(); i++) {
             result[i] = list.get(i);
         }
         return result;
     }
     
-    public static double generateNormalDistribution(Random random, double mean, double variance) {
-    
+    public static double generateNormalDistribution() {
+        Random random = new Random();
+        int meanHeight = 7;
+        int variance = 3;
+
         double u1 = 1.0 - random.nextDouble();
         double u2 = 1.0 - random.nextDouble();
         double z = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
 
-        return mean + Math.sqrt(variance) * z;
+        return meanHeight + Math.sqrt(variance) * z;
     }
 }
